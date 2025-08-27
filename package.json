@@ -1,7 +1,9 @@
 {
   "name": "modern_fullstack_react",
   "version": "1.0.0",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
