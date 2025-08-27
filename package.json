@@ -1,0 +1,19 @@
+{
+  "name": "modern_fullstack_react",
+  "version": "1.0.0",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": [
+      "npx prettier --write",
+      "npx eslint --fix"
+    ]
+  }
+}
