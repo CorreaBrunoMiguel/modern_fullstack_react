@@ -1,0 +1,39 @@
+services:
+  blog-database:
+    image: mongo:6.0
+    container_name: blog-database
+    ports:
+      - '27018:27017'
+    environment:
+      MONGO_INITDB_DATABASE: blog
+
+  blog-backend:
+    build:
+      context: backend/
+      args:
+        NODE_ENV: development
+    container_name: blog-backend
+    environment:
+      PORT: 3001
+      DATABASE_URL: mongodb://blog-database:27017/blog
+    ports:
+      - '3001:3001'
+    depends_on:
+      - blog-database
+    command: >
+      sh -c "
+        ./wait-for-it.sh blog-database:27017 -- 
+        npm start
+      "
+
+  blog-frontend:
+    build:
+      context: . # raiz do projeto
+      dockerfile: dockerfile # Dockerfile do frontend na raiz
+      args:
+        VITE_BACKEND_URL: http://blog-backend:3001/api/v1
+    container_name: blog-frontend
+    ports:
+      - '3000:80'
+    depends_on:
+      - blog-backend

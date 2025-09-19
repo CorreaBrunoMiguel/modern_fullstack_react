@@ -1,0 +1,7 @@
+node_moules
+.env*
+backend
+.vscode
+.git
+.husky
+.commitlintrc.json

@@ -1,0 +1,20 @@
+# Container final nginx
+FROM nginx:alpine
+
+# Diretório padrão do nginx
+WORKDIR /usr/share/nginx/html
+
+# Remove arquivos default do nginx
+RUN rm -rf ./*
+
+# Copia a build do Vite (dist/) para o container
+COPY dist/ .
+
+# Copia favicon ou assets extras se precisar
+# COPY public/ .
+
+# Expõe a porta 80
+EXPOSE 80
+
+# Comando para rodar o nginx em foreground
+CMD ["nginx", "-g", "daemon off;"]
